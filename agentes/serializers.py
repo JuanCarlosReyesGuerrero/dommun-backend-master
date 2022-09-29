@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from propiedades.serializers import PropiedadLiteSerializer
 from .models import Agente, Inmobiliaria
 
 
@@ -14,7 +16,16 @@ class AgentePATCHSerializer(serializers.ModelSerializer):
         fields = ('id')
 
 
+class InmobiliariaLiteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inmobiliaria
+        fields = ('id', 'slug', 'nit', 'nombre', 'direccion', 'telefono', 'activo', 'created_date')
+
+
 class AgenteSerializers(serializers.ModelSerializer):
+    inmobiliarias = InmobiliariaLiteSerializer(read_only=True, many=True)
+    propiedades = PropiedadLiteSerializer(read_only=True, many=True)
+
     class Meta:
         model = Agente
         fields = '__all__'
@@ -22,12 +33,6 @@ class AgenteSerializers(serializers.ModelSerializer):
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
-
-
-class InmobiliariaLiteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Inmobiliaria
-        fields = ('id', 'slug', 'nit', 'nombre', 'direccion', 'telefono', 'activo', 'created_date')
 
 
 class InmobiliariaPATCHSerializer(serializers.ModelSerializer):

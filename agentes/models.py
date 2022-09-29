@@ -10,8 +10,8 @@ class Inmobiliaria(models.Model):
     direccion = models.TextField(null=True, blank=True)
     telefono = models.CharField(null=True, blank=True, max_length=30)
     activo = models.BooleanField(null=False, default=True, blank=False)
-    created_date = models.DateTimeField(default=timezone.now)
-    updated_date = models.DateTimeField(blank=True, null=True)
+    created_date = models.DateTimeField(null=True, auto_now_add=True)
+    updated_date = models.DateTimeField(null=True, auto_now=True)
 
     def publish(self):
         self.updated_date = timezone.now()
@@ -44,14 +44,10 @@ class Agente(models.Model):
     instagram = models.CharField(max_length=120, null=True, blank=True)
     website = models.CharField(max_length=120, null=True, blank=True)
     activo = models.BooleanField(null=False, default=True, blank=False)
-    created_date = models.DateTimeField(default=timezone.now)
-    updated_date = models.DateTimeField(blank=True, null=True)
+    created_date = models.DateTimeField(null=True, auto_now_add=True)
+    updated_date = models.DateTimeField(null=True, auto_now=True)
     inmobiliaria = models.ForeignKey(Inmobiliaria, null=True, blank=True, related_name='agentes',
                                      on_delete=models.CASCADE)
-
-    def publish(self):
-        self.updated_date = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.nombre + " " + self.apellido
@@ -64,7 +60,8 @@ class Agente(models.Model):
                 user = User.objects.create_user(username=self.slug,
                                                 email=self.email,
                                                 first_name=self.nombre,
-                                                last_name=self.apellido, password='FAJSflk-ehqKLY570TY34P87')
+                                                last_name=self.apellido,
+                                                password='FAJSflk-ehqKLY570TY34P87')
                 g = Group.objects.get(name='agentes')
                 g.user_set.add(user)
                 self.user = user

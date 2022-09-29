@@ -29,6 +29,7 @@ class AgentesList(generics.ListCreateAPIView):
             rep = Response(json.loads(qs))
         return rep
 
+
 class InmobiliariasList(generics.ListCreateAPIView):
     queryset = Inmobiliaria.objects.filter(activo=True, publicado=True, foto_perfil__isnull=False)
     serializer_class = InmobiliariaLiteSerializer

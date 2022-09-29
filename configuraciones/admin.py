@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from configuraciones.models import Estrato,TipoOferta, TipoPropiedad, EstadoPropiedad, Ciudad, TipoParqueadero, TiempoConstruido, \
+from configuraciones.models import Estrato, TipoOferta, TipoPropiedad, EstadoPropiedad, Ciudad, TipoParqueadero, TiempoConstruido, \
     CaracteristicaParqueadero, NumeroBano, NumeroHabitacion, NumeroParqueadero
 
 admin.site.register(Estrato)
