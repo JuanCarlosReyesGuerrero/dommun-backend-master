@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 from agentes.models import Agente
 from configuraciones.models import Estrato, TipoOferta, TipoPropiedad, Ciudad, TiempoConstruido, NumeroHabitacion, \

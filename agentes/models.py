@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
 
 
 class Inmobiliaria(models.Model):
@@ -12,10 +11,6 @@ class Inmobiliaria(models.Model):
     activo = models.BooleanField(null=False, default=True, blank=False)
     created_date = models.DateTimeField(null=True, auto_now_add=True)
     updated_date = models.DateTimeField(null=True, auto_now=True)
-
-    def publish(self):
-        self.updated_date = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.nombre

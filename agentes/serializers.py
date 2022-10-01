@@ -24,7 +24,7 @@ class InmobiliariaLiteSerializer(serializers.ModelSerializer):
 
 class AgenteSerializers(serializers.ModelSerializer):
     inmobiliarias = InmobiliariaLiteSerializer(read_only=True, many=True)
-    propiedades = PropiedadLiteSerializer(read_only=True, many=True)
+    #propiedades = PropiedadLiteSerializer(read_only=True, many=True)
 
     class Meta:
         model = Agente
